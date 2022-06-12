@@ -6,6 +6,11 @@ use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property int id
+ * @property int $user_id
+ * @property User $user
+ */
 class Car extends Model
 {
     protected $guarded = [];

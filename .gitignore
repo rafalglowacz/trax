@@ -3,6 +3,7 @@
 /public/storage
 /vendor
 /.idea
+/.phpunit.result.cache
 /.vscode
 /.vagrant
 Homestead.json

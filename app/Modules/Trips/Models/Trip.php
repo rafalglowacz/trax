@@ -6,6 +6,10 @@ use App\Modules\Cars\Models\Car;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property Car $car
+ * @property int $miles
+ */
 class Trip extends Model
 {
     protected $casts = ['date' => 'datetime'];
