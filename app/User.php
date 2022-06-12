@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Modules\Cars\Models\Car;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
@@ -27,4 +29,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    // region relations
+
+    public function cars(): HasMany
+    {
+        return $this->hasMany(Car::class);
+    }
+
+    // endregion relations
 }

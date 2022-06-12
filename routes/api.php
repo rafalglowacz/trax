@@ -1,7 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Modules\Cars\Http\Controllers\CarController;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +18,7 @@ use Carbon\Carbon;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
-})->middleware('auth:api');
+})->middleware('auth:sanctum');
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -58,10 +60,9 @@ Route::get('/mock-get-cars', function(Request $request) {
             ]
         ]
     ];
-})->middleware('auth:api');
+})->middleware('auth:sanctum');
 
-
-// Mock endpoint to add a new car.
+Route::apiResource('cars', CarController::class)->only('store')->middleware('auth:sanctum');
 
 Route::post('mock-add-car', function(Request $request) {
     $request->validate([
@@ -69,7 +70,7 @@ Route::post('mock-add-car', function(Request $request) {
         'make' => 'required|string',
         'model' => 'required|string'
     ]);
-})->middleware('auth:api');
+})->middleware('auth:sanctum');
 
 
 // Mock endpoint to get a car with the given id
@@ -85,13 +86,13 @@ Route::get('/mock-get-car/{id}', function(Request $request) {
             'trip_miles' => 18.1
         ]
     ];
-})->middleware('auth:api');
+})->middleware('auth:sanctum');
 
 
 // Mock endpoint to delete a car with a given id
 
 Route::delete('mock-delete-car/{id}', function(Request $request) {
-})->middleware('auth:api');
+})->middleware('auth:sanctum');
 
 
 // Mock endpoint to get the trips for the logged in user
@@ -161,7 +162,7 @@ Route::get('/mock-get-trips', function(Request $request) {
             ]
         ]
     ];
-})->middleware('auth:api');
+})->middleware('auth:sanctum');
 
 
 // Mock endpoint to add a new trip.
@@ -172,4 +173,4 @@ Route::post('mock-add-trip', function(Request $request) {
         'car_id' => 'required|integer',
         'miles' => 'required|numeric'
     ]);
-})->middleware('auth:api');
+})->middleware('auth:sanctum');
