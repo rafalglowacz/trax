@@ -4,14 +4,18 @@ use App\Modules\Cars\Http\Controllers\CarController;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Modules\Trips\Http\Controllers\TripController;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
 
-Route::apiResource('cars', CarController::class)
-    ->only(['index', 'store', 'show', 'destroy'])
-    ->middleware('auth:sanctum');
+    Route::apiResource('cars', CarController::class)->only(['index', 'store', 'show', 'destroy']);
+
+    Route::apiResource('trips', TripController::class)->only(['store']);
+});
+
 
 Route::get('/mock-get-trips', function(Request $request) {
     return [
@@ -78,15 +82,4 @@ Route::get('/mock-get-trips', function(Request $request) {
             ]
         ]
     ];
-})->middleware('auth:sanctum');
-
-
-// Mock endpoint to add a new trip.
-
-Route::post('mock-add-trip', function(Request $request) {
-    $request->validate([
-        'date' => 'required|date', // ISO 8601 string
-        'car_id' => 'required|integer',
-        'miles' => 'required|numeric'
-    ]);
 })->middleware('auth:sanctum');
