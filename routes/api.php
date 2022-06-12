@@ -29,32 +29,7 @@ Route::get('/user', function (Request $request) {
 ///   the API implementation
 //////////////////////////////////////////////////////////////////////////
 
-Route::apiResource('cars', CarController::class)->only(['index', 'store'])->middleware('auth:sanctum');
-
-Route::post('mock-add-car', function(Request $request) {
-    $request->validate([
-        'year' => 'required|integer',
-        'make' => 'required|string',
-        'model' => 'required|string'
-    ]);
-})->middleware('auth:sanctum');
-
-
-// Mock endpoint to get a car with the given id
-
-Route::get('/mock-get-car/{id}', function(Request $request) {
-    return  [
-        'data' => [
-            'id' => 1,
-            'make' => 'Land Rover',
-            'model' => 'Range Rover Sport',
-            'year' => 2017,
-            'trip_count' => 2,
-            'trip_miles' => 18.1
-        ]
-    ];
-})->middleware('auth:sanctum');
-
+Route::apiResource('cars', CarController::class)->only(['index', 'store', 'show'])->middleware('auth:sanctum');
 
 // Mock endpoint to delete a car with a given id
 
