@@ -2,7 +2,7 @@
 
 namespace App\Modules\Trips\Models;
 
-use App\User;
+use App\Modules\Cars\Models\Car;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -14,9 +14,9 @@ class Trip extends Model
 
     // region relations
 
-    public function user(): BelongsTo
+    public function car(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Car::class);
     }
 
     // endregion relations

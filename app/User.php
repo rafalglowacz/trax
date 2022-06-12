@@ -41,7 +41,7 @@ class User extends Authenticatable
 
     public function trips(): HasManyThrough
     {
-        return $this->hasManyThrough(Trip::class, Car::class);
+        return $this->hasManyThrough(Trip::class, Car::class)->orderBy('date', 'desc');
     }
 
     // endregion relations

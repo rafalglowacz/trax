@@ -1,10 +1,9 @@
 <?php
 
 use App\Modules\Cars\Http\Controllers\CarController;
-use Carbon\Carbon;
+use App\Modules\Trips\Http\Controllers\TripController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Modules\Trips\Http\Controllers\TripController;
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/user', function (Request $request) {
@@ -13,73 +12,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::apiResource('cars', CarController::class)->only(['index', 'store', 'show', 'destroy']);
 
-    Route::apiResource('trips', TripController::class)->only(['store']);
+    Route::apiResource('trips', TripController::class)->only(['index', 'store']);
 });
-
-
-Route::get('/mock-get-trips', function(Request $request) {
-    return [
-        'data' => [
-            [
-                'id'  => 1,
-                'date' => Carbon::now()->subDays(1)->format('m/d/Y'),
-                'miles' => 11.3,
-                'total' => 45.3,
-                'car' => [
-                    'id' => 1,
-                    'make' => 'Land Rover',
-                    'model' => 'Range Rover Sport',
-                    'year' => 2017
-                ]
-            ],
-            [
-                'id'  => 2,
-                'date' => Carbon::now()->subDays(2)->format('m/d/Y'),
-                'miles' => 12.0,
-                'total' => 34.1,
-                'car' => [
-                    'id' => 4,
-                    'make' => 'Aston Martin',
-                    'model' => 'Vanquish',
-                    'year' => 2018
-                ]
-            ],
-            [
-                'id'  => 3,
-                'date' => Carbon::now()->subDays(3)->format('m/d/Y'),
-                'miles' => 6.8,
-                'total' => 22.1,
-                'car' => [
-                    'id' => 1,
-                    'make' => 'Land Rover',
-                    'model' => 'Range Rover Sport',
-                    'year' => 2017
-                ]
-            ],
-            [
-                'id'  => 4,
-                'date' => Carbon::now()->subDays(4)->format('m/d/Y'),
-                'miles' => 5,
-                'total' => 15.3,
-                'car' => [
-                    'id' => 2,
-                    'make' => 'Ford',
-                    'model' => 'F150',
-                    'year' => 2014
-                ]
-            ],
-            [
-                'id'  => 5,
-                'date' => Carbon::now()->subDays(5)->format('m/d/Y'),
-                'miles' => 10.3,
-                'total' => 10.3,
-                'car' => [
-                    'id' => 3,
-                    'make' => 'Chevy',
-                    'model' => 'Tahoe',
-                    'year' => 2015
-                ]
-            ]
-        ]
-    ];
-})->middleware('auth:sanctum');
