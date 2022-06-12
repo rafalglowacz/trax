@@ -5,39 +5,13 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-
-//////////////////////////////////////////////////////////////////////////
-/// Mock Endpoints To Be Replaced With RESTful API.
-/// - API implementation needs to return data in the format seen below.
-/// - Post data will be in the format seen below.
-/// - /resource/assets/traxAPI.js will have to be updated to align with
-///   the API implementation
-//////////////////////////////////////////////////////////////////////////
-
-Route::apiResource('cars', CarController::class)->only(['index', 'store', 'show'])->middleware('auth:sanctum');
-
-// Mock endpoint to delete a car with a given id
-
-Route::delete('mock-delete-car/{id}', function(Request $request) {
-})->middleware('auth:sanctum');
-
-
-// Mock endpoint to get the trips for the logged in user
+Route::apiResource('cars', CarController::class)
+    ->only(['index', 'store', 'show', 'destroy'])
+    ->middleware('auth:sanctum');
 
 Route::get('/mock-get-trips', function(Request $request) {
     return [

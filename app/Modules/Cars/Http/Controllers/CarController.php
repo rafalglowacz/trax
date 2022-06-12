@@ -29,4 +29,11 @@ class CarController extends Controller
     {
         return new CarResource($request->user()->cars()->where('id', $id)->firstOrFail());
     }
+
+    public function destroy(int $id, Request $request): Response
+    {
+        $request->user()->cars()->where('id', $id)->delete();
+
+        return ResponseFacade::make();
+    }
 }
