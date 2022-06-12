@@ -3,7 +3,7 @@
 namespace App\Modules\Cars\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Car as CarResource;
+use App\Modules\Cars\Http\Resources\CarResource as CarResource;
 use App\Modules\Cars\Http\Requests\CarRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;

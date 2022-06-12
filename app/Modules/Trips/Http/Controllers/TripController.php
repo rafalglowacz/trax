@@ -4,7 +4,7 @@ namespace App\Modules\Trips\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Modules\Trips\Http\Requests\TripRequest;
-use App\Modules\Trips\Resources\Trip as TripResource;
+use App\Modules\Trips\Resources\TripResource as TripResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\Response;
@@ -19,7 +19,11 @@ class TripController extends Controller
 
     public function store(TripRequest $request): Response
     {
-        $request->user()->trips()->create($request->validated());
+        $data = $request->validated() + [
+                'total' => $request->user()->trips()->sum('miles') + $request->validated()['miles'],
+            ];
+
+        $request->user()->trips()->create($data);
 
         return ResponseFacade::make();
     }

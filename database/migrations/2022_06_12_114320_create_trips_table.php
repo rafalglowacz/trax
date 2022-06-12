@@ -12,6 +12,7 @@ class CreateTripsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('car_id');
             $table->unsignedInteger('miles');
+            $table->unsignedInteger('total');
             $table->timestamp('date');
             $table->timestamps();
 

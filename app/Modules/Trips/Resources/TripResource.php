@@ -2,12 +2,12 @@
 
 namespace App\Modules\Trips\Resources;
 
-use App\Http\Resources\Car;
+use App\Modules\Cars\Http\Resources\CarResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Arr;
 
-class Trip extends JsonResource
+class TripResource extends JsonResource
 {
     /**
      * @param Request $request
@@ -17,9 +17,9 @@ class Trip extends JsonResource
     {
         return Arr::only(
                 $this->resource->attributesToArray(),
-                ['id', 'date', 'miles', 'year']
+                ['id', 'date', 'miles', 'total', 'year']
             ) + [
-                'car' => new Car($this->whenLoaded('car')),
+                'car' => new CarResource($this->whenLoaded('car')),
             ];
     }
 }
